@@ -18,6 +18,12 @@ public class Cajero extends Thread{
     public ArrayList<transaccion> transacciones;
     
     
+    public Cajero(String nombre){
+        this.nombre=nombre;
+        
+        transacciones=new ArrayList<>();
+    }
+    
     @Override
     public void run(){
         System.out.println("El cajero " + this.nombre + " COMIENZA A PROCESAR LA TRANSACCION DEL CLIENTE " 
@@ -27,11 +33,12 @@ public class Cajero extends Thread{
         transacciones=cliente.getTransacciones();
 
 		for (transaccion e: transacciones) { 
-			this.esperarXsegundos(e); 
+			
 			System.out.println("Procesado la transaccion " + e.nombre 
 			+ " del cliente " + this.cliente.getNombre() + "->Tiempo: " 
 			+ (System.currentTimeMillis() - this.initialTime) / 1000 
 			+ "seg");
+                        this.esperarXsegundos(e); 
 		}
 
 		System.out.println("El cajero " + this.nombre + " HA TERMINADO DE PROCESAR " 
@@ -51,5 +58,9 @@ public class Cajero extends Thread{
 			Thread.currentThread().interrupt();
 		}
 	}
+    public void setCliente(Cliente cliente, long time){
+        this.cliente=cliente;
+        this.initialTime=time;
+    }
     
 }

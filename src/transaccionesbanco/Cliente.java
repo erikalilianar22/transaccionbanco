@@ -16,6 +16,7 @@ class Cliente {
     private ArrayList <transaccion> transacciones;
     public Cliente(String nombre){
         this.nombre=nombre;
+        transacciones=new ArrayList<>();
     }
 
     public String getNombre() {
